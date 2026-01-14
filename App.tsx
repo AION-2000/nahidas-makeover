@@ -3,7 +3,8 @@ import { ViewState, Product, Review } from './types';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import ProductGrid from './components/ProductGrid';
-import AIConsultant from './components/AIConsultant';
+import Services from './components/Services';
+import OurStory from './components/OurStory';
 import ProductDetail from './components/ProductDetail';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -86,7 +87,7 @@ const App: React.FC = () => {
   const [showIntro, setShowIntro] = useState(false);
   const [appReady, setAppReady] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  
+
   const [cart, setCart] = useState<Product[]>([]);
   const [wishlist, setWishlist] = useState<Product[]>([]);
 
@@ -142,8 +143,8 @@ const App: React.FC = () => {
     window.open(`https://wa.me/message/KUQBNJZDF62CP1?text=${encodedMessage}`, '_blank');
   };
 
-  const filteredProducts = MOCK_PRODUCTS.filter(p => 
-    p.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+  const filteredProducts = MOCK_PRODUCTS.filter(p =>
+    p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     p.category.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -168,11 +169,11 @@ const App: React.FC = () => {
 
   const signatureItemVariants = {
     hidden: { opacity: 0, y: 30, filter: 'blur(10px)' },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
+    visible: {
+      opacity: 1,
+      y: 0,
       filter: 'blur(0px)',
-      transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] } 
+      transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] }
     }
   };
 
@@ -185,15 +186,15 @@ const App: React.FC = () => {
           </motion.div>
         )}
       </AnimatePresence>
-      
+
       <div className={`flex flex-col min-h-screen transition-opacity duration-1000 ${isContentVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-        <Header 
-          currentView={view} 
-          onNavigate={navigateTo} 
+        <Header
+          currentView={view}
+          onNavigate={navigateTo}
           cartCount={cart.length}
           wishlistCount={wishlist.length}
         />
-        
+
         <main className="flex-grow pt-0">
           <AnimatePresence mode="wait">
             <motion.div
@@ -206,76 +207,76 @@ const App: React.FC = () => {
             >
               {view === ViewState.HOME && (
                 <div>
-                  <Hero 
-                    onStartConsultation={() => navigateTo(ViewState.CONSULTANT)} 
+                  <Hero
+                    onStartConsultation={() => navigateTo(ViewState.CONTACT)}
                     onVisitShop={() => navigateTo(ViewState.SHOP)}
                   />
-                  
+
                   {/* SEAMLESS PORTAL TRANSITION */}
                   <section className="relative bg-[#fffdfd] overflow-hidden -mt-24 z-10">
                     {/* Bottom half of the Portal Ring (Mirrors Hero) */}
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[140vw] h-[140vw] pointer-events-none z-0 opacity-10">
                       <div className="w-full h-full rounded-full border-[1px] border-rose-300"></div>
                     </div>
-                    
+
                     <div className="container mx-auto px-6 py-48 md:py-64 relative z-20">
-                      <motion.div 
+                      <motion.div
                         variants={signatureRevealVariants}
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, margin: "-150px" }}
                         className="text-center mb-16 md:mb-24 flex flex-col items-center"
                       >
-                        <motion.span 
+                        <motion.span
                           variants={signatureItemVariants}
                           className="text-rose-400 font-bold tracking-[0.4em] uppercase text-[10px] mb-6 block"
                         >
                           Hand-Picked Selection
                         </motion.span>
-                        
-                        <motion.h2 
+
+                        <motion.h2
                           variants={signatureItemVariants}
                           className="text-4xl md:text-7xl font-bold text-slate-900 mb-8 serif italic"
                         >
                           Signature Collection
                         </motion.h2>
 
-                        <motion.div 
+                        <motion.div
                           initial={{ width: 0, opacity: 0 }}
                           whileInView={{ width: '150px', opacity: 1 }}
                           transition={{ delay: 0.8, duration: 2.5, ease: "circOut" }}
                           className="h-[1px] bg-gradient-to-r from-transparent via-rose-300 to-transparent mb-10"
                         />
 
-                        <motion.p 
+                        <motion.p
                           variants={signatureItemVariants}
                           className="text-slate-500 max-w-2xl mx-auto text-lg md:text-2xl italic px-4 font-light leading-relaxed"
                         >
                           "Beauty begins the moment you decide to be yourself."
                         </motion.p>
                       </motion.div>
-                      
-                      <ProductGrid 
-                        products={MOCK_PRODUCTS.slice(0, 3)} 
-                        onProductClick={(p) => navigateTo(ViewState.PRODUCT_DETAIL, p)} 
+
+                      <ProductGrid
+                        products={MOCK_PRODUCTS.slice(0, 3)}
+                        onProductClick={(p) => navigateTo(ViewState.PRODUCT_DETAIL, p)}
                         wishlist={wishlist}
                         onToggleWishlist={toggleWishlist}
                       />
-                      
-                      <motion.div 
+
+                      <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.5, duration: 1 }}
                         className="text-center mt-16 md:mt-24"
                       >
-                        <button 
+                        <button
                           onClick={() => navigateTo(ViewState.SHOP)}
                           className="group relative px-10 md:px-16 py-4 md:py-5 text-slate-900 font-bold transition-all duration-700 uppercase tracking-widest text-[11px] overflow-hidden rounded-xl"
                         >
                           <div className="absolute inset-0 border-2 border-slate-900 rounded-xl group-hover:bg-slate-900 transition-colors duration-500"></div>
                           <span className="relative z-10 group-hover:text-white transition-colors duration-500 flex items-center gap-3">
-                            Explore Boutique
+                            Explore Shop
                             <i className="fa-solid fa-arrow-right-long transition-transform group-hover:translate-x-2"></i>
                           </span>
                         </button>
@@ -288,10 +289,10 @@ const App: React.FC = () => {
               {view === ViewState.SHOP && (
                 <div className="container mx-auto px-6 py-24 md:py-32">
                   <div className="text-center mb-12">
-                    <h1 className="text-4xl md:text-6xl font-bold mb-4 serif italic">{searchTerm ? `Results for "${searchTerm}"` : 'The Boutique'}</h1>
+                    <h1 className="text-4xl md:text-6xl font-bold mb-4 serif italic">{searchTerm ? `Results for "${searchTerm}"` : 'The Shop'}</h1>
                     <div className="w-16 md:w-24 h-px bg-rose-200 mx-auto mb-4"></div>
                     {searchTerm && (
-                      <button 
+                      <button
                         onClick={() => setSearchTerm('')}
                         className="text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-pink-400 transition-colors"
                       >
@@ -300,9 +301,9 @@ const App: React.FC = () => {
                     )}
                   </div>
                   {filteredProducts.length > 0 ? (
-                    <ProductGrid 
-                      products={filteredProducts} 
-                      onProductClick={(p) => navigateTo(ViewState.PRODUCT_DETAIL, p)} 
+                    <ProductGrid
+                      products={filteredProducts}
+                      onProductClick={(p) => navigateTo(ViewState.PRODUCT_DETAIL, p)}
                       wishlist={wishlist}
                       onToggleWishlist={toggleWishlist}
                     />
@@ -316,16 +317,18 @@ const App: React.FC = () => {
                 </div>
               )}
 
+              {view === ViewState.SERVICES && (
+                <Services />
+              )}
+
               {view === ViewState.CONSULTANT && (
-                <div className="container mx-auto px-4 md:px-6 py-24 md:py-32">
-                  <AIConsultant />
-                </div>
+                <OurStory />
               )}
 
               {view === ViewState.PRODUCT_DETAIL && selectedProduct && (
-                <ProductDetail 
-                  product={selectedProduct} 
-                  onBack={() => navigateTo(ViewState.SHOP)} 
+                <ProductDetail
+                  product={selectedProduct}
+                  onBack={() => navigateTo(ViewState.SHOP)}
                   onAddToCart={addToCart}
                   onAddToWishlist={toggleWishlist}
                 />
@@ -352,7 +355,7 @@ const App: React.FC = () => {
                                 <h4 className="text-lg font-bold text-slate-800">{product.name}</h4>
                                 <p className="text-slate-400 font-light italic text-sm">${product.price}.00</p>
                               </div>
-                              <button 
+                              <button
                                 onClick={() => removeFromCart(idx)}
                                 className="text-slate-200 hover:text-red-400 transition-all p-2 hover:rotate-12"
                               >
@@ -361,13 +364,13 @@ const App: React.FC = () => {
                             </div>
                           ))}
                         </div>
-                        
+
                         <div className="border-t border-rose-50 pt-10 flex flex-col md:flex-row justify-between items-center gap-8">
                           <div>
                             <p className="text-slate-400 text-xs uppercase tracking-widest font-bold mb-1">Subtotal</p>
                             <p className="text-4xl font-light text-slate-900 serif italic">${cartTotal}.00</p>
                           </div>
-                          <button 
+                          <button
                             onClick={handleCheckout}
                             className="w-full md:w-auto px-12 py-5 bg-slate-900 text-white font-bold rounded-2xl hover:bg-rose-400 transition-all shadow-xl flex items-center justify-center gap-3 hover:scale-105 active:scale-95 duration-500"
                           >
@@ -384,11 +387,11 @@ const App: React.FC = () => {
                       </div>
                       <h2 className="text-4xl font-bold text-slate-900 serif italic">Your Bag is Empty</h2>
                       <p className="text-slate-500 font-light italic">"A queen always needs her essentials." Start your collection today.</p>
-                      <button 
+                      <button
                         onClick={() => navigateTo(ViewState.SHOP)}
                         className="px-12 py-4 bg-slate-900 text-white font-bold rounded-2xl hover:bg-rose-400 transition-all uppercase tracking-widest text-xs"
                       >
-                        Shop the Boutique
+                        Visit Shop
                       </button>
                     </div>
                   )}
@@ -403,7 +406,7 @@ const App: React.FC = () => {
                       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                         {wishlist.map((product) => (
                           <div key={product.id} className="relative group bg-white border border-rose-50 rounded-[2rem] p-6 shadow-xl shadow-rose-100/10 hover:shadow-rose-100/30 transition-all duration-700">
-                            <button 
+                            <button
                               onClick={() => toggleWishlist(product)}
                               className="absolute top-4 right-4 z-10 w-8 h-8 bg-white/80 backdrop-blur-md rounded-full text-red-400 flex items-center justify-center shadow-md hover:bg-red-400 hover:text-white transition-all duration-500 hover:scale-125"
                             >
@@ -416,7 +419,7 @@ const App: React.FC = () => {
                             <p className="text-pink-400 text-[10px] font-bold uppercase tracking-widest mb-4">{product.category}</p>
                             <div className="flex justify-between items-center">
                               <p className="text-xl font-light text-slate-900 serif italic">${product.price}.00</p>
-                              <button 
+                              <button
                                 onClick={() => navigateTo(ViewState.PRODUCT_DETAIL, product)}
                                 className="p-3 bg-slate-900 text-white rounded-xl hover:bg-pink-400 transition-all duration-500 hover:scale-110"
                               >
@@ -434,7 +437,7 @@ const App: React.FC = () => {
                       </div>
                       <h2 className="text-4xl font-bold text-slate-900 serif italic">Your Wishlist</h2>
                       <p className="text-slate-500 font-light italic">Save your favorite glows for later.</p>
-                      <button 
+                      <button
                         onClick={() => navigateTo(ViewState.SHOP)}
                         className="px-12 py-4 border-2 border-slate-900 text-slate-900 font-bold rounded-2xl hover:bg-slate-900 hover:text-white transition-all uppercase tracking-widest text-xs"
                       >

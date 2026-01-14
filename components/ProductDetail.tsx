@@ -63,7 +63,7 @@ Please confirm my order and let me know the payment details!`;
 
     const encodedMessage = encodeURIComponent(message);
     const waLink = `https://wa.me/message/KUQBNJZDF62CP1?text=${encodedMessage}`;
-    
+
     window.open(waLink, '_blank');
   };
 
@@ -106,15 +106,15 @@ Please confirm my order and let me know the payment details!`;
   return (
     <div className="container mx-auto px-6 py-16 animate-fade-in">
       <div className="flex justify-between items-center mb-12">
-        <button 
+        <button
           onClick={onBack}
           className="group flex items-center gap-3 text-slate-400 hover:text-rose-400 transition-all font-bold uppercase text-[10px] tracking-widest"
         >
           <i className="fa-solid fa-chevron-left group-hover:-translate-x-1 transition-transform"></i>
-          Return to Boutique
+          Return to Shop
         </button>
 
-        <button 
+        <button
           onClick={handleAddToWishlistClick}
           className={`flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest transition-all ${isAddedToWishlist ? 'text-pink-400' : 'text-slate-400 hover:text-pink-400'}`}
         >
@@ -132,7 +132,7 @@ Please confirm my order and let me know the payment details!`;
         </div>
 
         {/* Right: Detailed Info & Form */}
-        <div className="flex flex-col animate-fade-up" style={{animationDelay: '0.1s'}}>
+        <div className="flex flex-col animate-fade-up" style={{ animationDelay: '0.1s' }}>
           <div className="mb-10">
             <span className="text-rose-300 font-bold uppercase tracking-[0.3em] text-[10px] mb-4 block">{product.category}</span>
             <h1 className="text-6xl font-bold text-slate-900 mb-6 leading-tight">{product.name}</h1>
@@ -155,9 +155,9 @@ Please confirm my order and let me know the payment details!`;
               <div className="w-8 h-8 bg-rose-50 rounded-full flex items-center justify-center">
                 <i className="fa-solid fa-gift text-rose-400 text-sm"></i>
               </div>
-              Your Boutique Order
+              Your Shop Order
             </h3>
-            
+
             <form onSubmit={handleBuy} className="space-y-5">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div className="space-y-2">
@@ -169,7 +169,7 @@ Please confirm my order and let me know the payment details!`;
                   <input required name="phone" value={formData.phone} onChange={handleInputChange} type="tel" placeholder="+880 1XXX-XXXXXX" className="w-full px-5 py-4 bg-rose-50/30 border border-transparent rounded-2xl focus:bg-white focus:border-rose-200 outline-none transition-all placeholder:text-slate-300" />
                 </div>
               </div>
-              
+
               <div className="space-y-2">
                 <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-1">Shipping Address</label>
                 <input required name="address" value={formData.address} onChange={handleInputChange} type="text" placeholder="Where should we send your glow?" className="w-full px-5 py-4 bg-rose-50/30 border border-transparent rounded-2xl focus:bg-white focus:border-rose-200 outline-none transition-all placeholder:text-slate-300" />
@@ -187,7 +187,7 @@ Please confirm my order and let me know the payment details!`;
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
-                <button 
+                <button
                   type="button"
                   onClick={handleAddToCartClick}
                   className={`py-5 rounded-2xl font-bold text-base transition-all flex items-center justify-center gap-3 border-2 ${isAddedToCart ? 'bg-green-50 border-green-200 text-green-600' : 'bg-white border-slate-900 text-slate-900 hover:bg-slate-50'}`}
@@ -195,7 +195,7 @@ Please confirm my order and let me know the payment details!`;
                   <i className={`fa-solid ${isAddedToCart ? 'fa-check' : 'fa-shopping-bag'}`}></i>
                   {isAddedToCart ? 'Added to Cart' : 'Add to Cart'}
                 </button>
-                <button 
+                <button
                   type="submit"
                   className="bg-slate-900 text-white py-5 rounded-2xl font-bold text-base hover:bg-rose-400 transition-all flex items-center justify-center gap-3 shadow-xl hover:-translate-y-1 active:scale-[0.98]"
                 >
@@ -232,7 +232,7 @@ Please confirm my order and let me know the payment details!`;
                 <i className="fa-solid fa-pen-nib text-pink-400"></i>
                 Share Your Glow
               </h3>
-              
+
               <form onSubmit={handleSubmitReview} className="space-y-4">
                 <div className="flex justify-center gap-2 mb-4">
                   {[1, 2, 3, 4, 5].map((star) => (
@@ -246,7 +246,7 @@ Please confirm my order and let me know the payment details!`;
                     </button>
                   ))}
                 </div>
-                
+
                 <input
                   required
                   name="userName"
@@ -255,7 +255,7 @@ Please confirm my order and let me know the payment details!`;
                   placeholder="Your Name"
                   className="w-full px-5 py-4 bg-rose-50/30 border border-transparent rounded-xl focus:bg-white focus:border-rose-200 outline-none transition-all text-sm"
                 />
-                
+
                 <textarea
                   required
                   name="comment"
@@ -277,7 +277,7 @@ Please confirm my order and let me know the payment details!`;
                     <>Publish Appraisal</>
                   )}
                 </button>
-                
+
                 {showSuccess && (
                   <p className="text-center text-[10px] font-bold text-green-500 uppercase tracking-widest animate-reveal mt-2">
                     Thank you for your radiance!

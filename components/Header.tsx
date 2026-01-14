@@ -15,7 +15,7 @@ const Header: React.FC<HeaderProps> = ({ currentView, onNavigate, cartCount, wis
   const [menuScrollY, setMenuScrollY] = useState(0);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  
+
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -71,10 +71,10 @@ const Header: React.FC<HeaderProps> = ({ currentView, onNavigate, cartCount, wis
     <>
       <header className={`fixed top-0 w-full z-50 transition-all duration-700 ${scrolled ? 'bg-white/80 backdrop-blur-xl py-3 md:py-4 shadow-sm' : 'bg-transparent py-6 md:py-8'}`}>
         <nav className="container mx-auto px-6 md:px-16 flex items-center justify-between">
-          <div 
+          <div
             className="cursor-pointer group z-50"
             onClick={() => onNavigate(ViewState.HOME)}
-            style={{ 
+            style={{
               filter: scrolled ? `blur(${Math.max(0, logoBlur)}px)` : 'none',
               opacity: scrolled ? logoOpacity : (isMenuOpen ? menuNavOpacity : 1),
               transform: `scale(${logoScale}) translateY(${isMenuOpen ? menuNavY : 0}px)`,
@@ -91,11 +91,12 @@ const Header: React.FC<HeaderProps> = ({ currentView, onNavigate, cartCount, wis
           <div className="hidden md:flex space-x-12 items-center text-xs font-bold uppercase tracking-[0.3em]">
             {[
               { id: ViewState.HOME, label: 'Studio' },
-              { id: ViewState.SHOP, label: 'Boutique' },
-              { id: ViewState.CONSULTANT, label: 'Consult' },
-              { id: ViewState.CONTACT, label: 'Connect' }
+              { id: ViewState.SHOP, label: 'Shop' },
+              { id: ViewState.SERVICES, label: 'Services' },
+              { id: ViewState.CONTACT, label: 'Contact' },
+              { id: ViewState.CONSULTANT, label: 'Our Story' }
             ].map((item) => (
-              <button 
+              <button
                 key={item.id}
                 onClick={() => onNavigate(item.id)}
                 className={`relative py-2 group overflow-hidden ${currentView === item.id ? 'text-black' : 'text-slate-400 hover:text-black'} transition-colors`}
@@ -108,15 +109,15 @@ const Header: React.FC<HeaderProps> = ({ currentView, onNavigate, cartCount, wis
 
           {/* Action Icons */}
           <div className="flex items-center space-x-6 md:space-x-8 text-slate-900 z-50" style={{ opacity: isMenuOpen ? menuNavOpacity : 1, filter: isMenuOpen ? `blur(${menuNavBlur}px)` : 'none', transform: `translateY(${isMenuOpen ? menuNavY : 0}px)`, transition: 'all 0.4s ease' }}>
-            <button 
+            <button
               onClick={() => setIsSearchOpen(true)}
               className="hover:text-pink-400 transition-colors relative hidden sm:block"
               aria-label="Search"
             >
               <i className="fa-solid fa-magnifying-glass text-base"></i>
             </button>
-            
-            <button 
+
+            <button
               onClick={() => onNavigate(ViewState.WISHLIST)}
               className={`hover:text-pink-400 transition-colors relative ${currentView === ViewState.WISHLIST ? 'text-pink-400' : ''}`}
               aria-label="Wishlist"
@@ -127,7 +128,7 @@ const Header: React.FC<HeaderProps> = ({ currentView, onNavigate, cartCount, wis
               )}
             </button>
 
-            <button 
+            <button
               onClick={() => onNavigate(ViewState.CART)}
               className={`hover:text-pink-400 transition-colors relative ${currentView === ViewState.CART ? 'text-pink-400' : ''}`}
               aria-label="Cart"
@@ -138,7 +139,7 @@ const Header: React.FC<HeaderProps> = ({ currentView, onNavigate, cartCount, wis
               )}
             </button>
 
-            <button 
+            <button
               className="md:hidden text-slate-900 hover:text-pink-400 transition-all active:scale-90"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Menu"
@@ -159,19 +160,19 @@ const Header: React.FC<HeaderProps> = ({ currentView, onNavigate, cartCount, wis
 
             {/* Sticky Top Mask for "Vanishing" effect */}
             <div className={`fixed top-0 left-0 w-full h-48 bg-gradient-to-b from-white via-white/80 to-transparent z-20 pointer-events-none backdrop-blur-[2px] transition-opacity duration-500 ${menuScrollY > 10 ? 'opacity-100' : 'opacity-0'}`}></div>
-            
+
             {/* Menu Header with Back Button - Vanishing Logic Added */}
-            <div 
+            <div
               className="fixed top-0 left-0 w-full z-30 px-6 py-6 md:py-8 flex items-center"
-              style={{ 
-                opacity: menuNavOpacity, 
-                filter: `blur(${menuNavBlur}px)`, 
+              style={{
+                opacity: menuNavOpacity,
+                filter: `blur(${menuNavBlur}px)`,
                 transform: `translateY(${menuNavY}px)`,
                 transition: 'opacity 0.3s ease, filter 0.3s ease, transform 0.3s ease',
                 pointerEvents: menuScrollY > 40 ? 'none' : 'auto'
               }}
             >
-              <button 
+              <button
                 onClick={() => setIsMenuOpen(false)}
                 className="flex items-center gap-3 text-slate-800 hover:text-pink-400 transition-all group active:scale-95"
               >
@@ -183,7 +184,7 @@ const Header: React.FC<HeaderProps> = ({ currentView, onNavigate, cartCount, wis
             </div>
 
             {/* Main Menu Scrollable Container */}
-            <div 
+            <div
               ref={menuRef}
               onScroll={handleMenuScroll}
               className="relative flex-grow overflow-y-auto px-8 py-32 z-10 custom-scrollbar scroll-smooth"
@@ -191,14 +192,15 @@ const Header: React.FC<HeaderProps> = ({ currentView, onNavigate, cartCount, wis
               <div className="flex flex-col items-center space-y-12 pb-32">
                 {[
                   { id: ViewState.HOME, label: 'Studio', sub: 'The Experience' },
-                  { id: ViewState.SHOP, label: 'Boutique', sub: 'Our Collection' },
-                  { id: ViewState.CONSULTANT, label: 'Consult', sub: 'Neural Artistry' },
-                  { id: ViewState.CONTACT, label: 'Connect', sub: 'Reach Out' },
+                  { id: ViewState.SHOP, label: 'Shop', sub: 'Our Collection' },
+                  { id: ViewState.SERVICES, label: 'Services', sub: 'Expert Care' },
+                  { id: ViewState.CONTACT, label: 'Contact', sub: 'Reach Out' },
+                  { id: ViewState.CONSULTANT, label: 'Our Story', sub: 'Neural Artistry' },
                   { id: ViewState.CART, label: 'My Bag', sub: `${cartCount} items` }
                 ].map((item, index) => (
-                  <button 
+                  <button
                     key={item.id}
-                    onClick={() => { onNavigate(item.id); setIsMenuOpen(false); }} 
+                    onClick={() => { onNavigate(item.id); setIsMenuOpen(false); }}
                     className="group relative flex flex-col items-center animate-fade-up w-full"
                     style={{ animationDelay: `${index * 80}ms` }}
                   >
@@ -211,7 +213,7 @@ const Header: React.FC<HeaderProps> = ({ currentView, onNavigate, cartCount, wis
                     <div className="w-0 h-[1px] bg-rose-200 mt-5 transition-all duration-500 group-hover:w-32"></div>
                   </button>
                 ))}
-                
+
                 <div className="pt-24 flex flex-col items-center gap-10 animate-fade-up" style={{ animationDelay: '500ms' }}>
                   <div className="flex items-center gap-8">
                     <div className="w-16 h-px bg-rose-50"></div>
@@ -226,7 +228,7 @@ const Header: React.FC<HeaderProps> = ({ currentView, onNavigate, cartCount, wis
                 </div>
               </div>
             </div>
-            
+
             {/* Bottom Mask */}
             <div className="fixed bottom-0 w-full h-32 bg-gradient-to-t from-white via-white/40 to-transparent z-20 pointer-events-none"></div>
           </div>
@@ -236,20 +238,20 @@ const Header: React.FC<HeaderProps> = ({ currentView, onNavigate, cartCount, wis
       {/* Search Overlay */}
       {isSearchOpen && (
         <div className="fixed inset-0 z-[100] bg-white/98 backdrop-blur-2xl flex flex-col items-center justify-center px-6 animate-fade-in">
-          <button 
+          <button
             onClick={() => setIsSearchOpen(false)}
             className="absolute top-10 md:top-12 right-10 md:right-12 text-black hover:text-pink-400 transition-all text-2xl"
           >
             <i className="fa-solid fa-xmark"></i>
           </button>
-          
+
           <div className="w-full max-w-2xl text-center">
             <span className="text-pink-400 font-bold uppercase tracking-[0.4em] text-[10px] mb-8 block">Find your radiance</span>
             <form onSubmit={handleSearchSubmit} className="relative">
-              <input 
+              <input
                 autoFocus
-                type="text" 
-                placeholder="Search collection..." 
+                type="text"
+                placeholder="Search collection..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full bg-transparent border-b-2 border-black py-4 md:py-6 text-2xl md:text-5xl font-bold text-black outline-none placeholder:text-slate-500 focus:border-pink-400 transition-all serif italic"
@@ -260,7 +262,7 @@ const Header: React.FC<HeaderProps> = ({ currentView, onNavigate, cartCount, wis
             </form>
             <div className="mt-8 md:mt-12 flex flex-wrap justify-center gap-3 md:gap-4">
               {['Lipstick', 'Foundation', 'Eyes', 'Serum', 'Face'].map(tag => (
-                <button 
+                <button
                   key={tag}
                   onClick={() => handleTagClick(tag)}
                   className="px-4 md:px-6 py-2 rounded-full border border-black text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-black hover:border-pink-400 hover:text-pink-400 transition-all"

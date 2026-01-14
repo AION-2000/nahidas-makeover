@@ -38,6 +38,7 @@ export enum ViewState {
   CONSULTANT = 'consultant',
   PRODUCT_DETAIL = 'product_detail',
   CONTACT = 'contact',
+  SERVICES = 'services',
   CART = 'cart',
   WISHLIST = 'wishlist'
 }

@@ -25,9 +25,9 @@ const Contact: React.FC = () => {
       const waMessage = `✨ New Inquiry from Nahida's Makeover ✨\n\n👤 Name: ${formData.firstName}\n📧 Email: ${formData.email}\n\n📝 Message:\n${formData.message}\n\nPlease get back to me soon!`;
       const encodedMessage = encodeURIComponent(waMessage);
       const waLink = `https://wa.me/message/KUQBNJZDF62CP1?text=${encodedMessage}`;
-      
+
       window.open(waLink, '_blank');
-      
+
       setIsSubmitting(false);
       setShowSuccess(true);
       setFormData({ firstName: '', email: '', message: '' });
@@ -45,13 +45,13 @@ const Contact: React.FC = () => {
             <span className="text-rose-400 font-bold uppercase tracking-[0.4em] text-[10px] mb-6 block">Direct Inquiry</span>
             <h1 className="text-7xl font-bold text-slate-900 mb-10 leading-[0.9]">Let's chat <br /><span className="serif italic font-light text-rose-400">gorgeous.</span></h1>
             <p className="text-slate-500 text-xl leading-relaxed mb-16 font-light italic">
-              "We're here to help you achieve your most stunning transformation. Reach out for consultations, events, or boutique support."
+              "We're here to help you achieve your most stunning transformation. Reach out for consultations, events, or shop support."
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
               <div className="space-y-3">
                 <h3 className="font-bold text-slate-900 uppercase text-xs tracking-widest">Studio</h3>
-                <p className="text-slate-400 text-sm leading-relaxed">Fashion District Boutique<br />7th Heaven Ave, Paris</p>
+                <p className="text-slate-400 text-sm leading-relaxed">Fashion District Shop<br />7th Heaven Ave, Paris</p>
               </div>
               <div className="space-y-3">
                 <h3 className="font-bold text-slate-900 uppercase text-xs tracking-widest">Email</h3>
@@ -68,51 +68,51 @@ const Contact: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-white rounded-[3rem] p-12 shadow-[0_40px_80px_-20px_rgba(183,110,121,0.15)] border border-rose-50 animate-fade-up" style={{animationDelay: '0.2s'}}>
+          <div className="bg-white rounded-[3rem] p-12 shadow-[0_40px_80px_-20px_rgba(183,110,121,0.15)] border border-rose-50 animate-fade-up" style={{ animationDelay: '0.2s' }}>
             <h2 className="text-3xl font-bold mb-10 text-slate-900 serif italic">Send us a love note</h2>
-            
+
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
                 <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-1">First Name</label>
-                <input 
+                <input
                   required
                   name="firstName"
                   value={formData.firstName}
                   onChange={handleInputChange}
-                  type="text" 
-                  placeholder="Lovely" 
-                  className="w-full px-6 py-5 bg-rose-50/20 border border-transparent rounded-2xl outline-none focus:bg-white focus:border-rose-200 transition-all placeholder:text-slate-300" 
+                  type="text"
+                  placeholder="Lovely"
+                  className="w-full px-6 py-5 bg-rose-50/20 border border-transparent rounded-2xl outline-none focus:bg-white focus:border-rose-200 transition-all placeholder:text-slate-300"
                 />
               </div>
-              
+
               <div className="space-y-2">
                 <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-1">Email Address</label>
-                <input 
+                <input
                   required
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  type="email" 
-                  placeholder="angel@glow.com" 
-                  className="w-full px-6 py-5 bg-rose-50/20 border border-transparent rounded-2xl outline-none focus:bg-white focus:border-rose-200 transition-all placeholder:text-slate-300" 
+                  type="email"
+                  placeholder="angel@glow.com"
+                  className="w-full px-6 py-5 bg-rose-50/20 border border-transparent rounded-2xl outline-none focus:bg-white focus:border-rose-200 transition-all placeholder:text-slate-300"
                 />
               </div>
 
               <div className="space-y-2">
                 <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-1">How can we help?</label>
-                <textarea 
+                <textarea
                   required
                   name="message"
                   value={formData.message}
                   onChange={handleInputChange}
-                  rows={4} 
-                  placeholder="Your thoughts here..." 
+                  rows={4}
+                  placeholder="Your thoughts here..."
                   className="w-full px-6 py-5 bg-rose-50/20 border border-transparent rounded-2xl outline-none focus:bg-white focus:border-rose-200 resize-none transition-all placeholder:text-slate-300"
                 ></textarea>
               </div>
 
               <div className="relative">
-                <button 
+                <button
                   type="submit"
                   disabled={isSubmitting}
                   className={`w-full py-6 rounded-2xl font-bold text-lg transition-all shadow-xl hover:-translate-y-1 flex items-center justify-center gap-3
@@ -130,7 +130,7 @@ const Contact: React.FC = () => {
                     </>
                   )}
                 </button>
-                
+
                 {showSuccess && (
                   <div className="absolute -bottom-16 left-0 w-full animate-blur-in text-center">
                     <p className="text-[10px] font-black uppercase tracking-[0.3em] text-green-500">

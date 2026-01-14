@@ -6,7 +6,7 @@ interface HeroProps {
   onVisitShop: () => void;
 }
 
-const WORDS = ['Studio', 'Boutique', 'Connect', 'Makeover', 'AI Beauty Consultant'];
+const WORDS = ['Studio', 'Shop', 'Connect', 'Makeover', 'Beauty Consultant'];
 
 const Hero: React.FC<HeroProps> = ({ onStartConsultation, onVisitShop }) => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
@@ -23,7 +23,7 @@ const Hero: React.FC<HeroProps> = ({ onStartConsultation, onVisitShop }) => {
   useEffect(() => {
     const handleType = () => {
       const fullWord = WORDS[currentWordIndex];
-      
+
       if (!isDeleting) {
         setDisplayText(fullWord.substring(0, displayText.length + 1));
         setTypingSpeed(100);
@@ -67,30 +67,30 @@ const Hero: React.FC<HeroProps> = ({ onStartConsultation, onVisitShop }) => {
   return (
     <section className="relative h-[95vh] flex items-center overflow-hidden bg-[#fffdfd]">
       {/* BACKGROUND & DYNAMIC MASKING */}
-      <motion.div 
+      <motion.div
         style={{ y: yParallax }}
         className="absolute inset-0 z-0"
       >
-        <motion.img 
+        <motion.img
           initial={{ scale: 1.1, filter: 'brightness(1.2)' }}
           animate={{ scale: 1, filter: 'brightness(1)' }}
           transition={{ duration: 3, ease: 'easeOut' }}
-          src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1920&auto=format&fit=crop" 
-          alt="Luxury Makeup" 
+          src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1920&auto=format&fit=crop"
+          alt="Luxury Makeup"
           className="w-full h-full object-cover brightness-[0.85] md:brightness-[0.9]"
           style={{
             maskImage: 'linear-gradient(to bottom, black 50%, transparent 90%)',
             WebkitMaskImage: 'linear-gradient(to bottom, black 50%, transparent 90%)'
           }}
         />
-        
+
         {/* Layered Lighting for Depth */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#fffdfd] via-[#fffdfd]/20 to-transparent"></div>
         <div className="absolute inset-x-0 bottom-0 h-[50vh] bg-gradient-to-t from-[#fffdfd] via-[#fffdfd]/80 to-transparent"></div>
       </motion.div>
 
       {/* PORTAL RING TRANSITION (The "Intro" Motion) */}
-      <motion.div 
+      <motion.div
         style={{ rotate: ringRotate, scale: bloomScale }}
         className="absolute bottom-[-25%] left-1/2 -translate-x-1/2 w-[140vw] h-[140vw] pointer-events-none z-10 opacity-20"
       >
@@ -104,13 +104,13 @@ const Hero: React.FC<HeroProps> = ({ onStartConsultation, onVisitShop }) => {
           <motion.div
             key={i}
             initial={{ y: 100, opacity: 0 }}
-            animate={{ 
-              y: [-20, -150], 
+            animate={{
+              y: [-20, -150],
               opacity: [0, 0.5, 0],
-              x: Math.random() * 60 - 30 
+              x: Math.random() * 60 - 30
             }}
-            transition={{ 
-              duration: 4 + Math.random() * 4, 
+            transition={{
+              duration: 4 + Math.random() * 4,
               repeat: Infinity,
               delay: Math.random() * 5
             }}
@@ -120,7 +120,7 @@ const Hero: React.FC<HeroProps> = ({ onStartConsultation, onVisitShop }) => {
         ))}
       </div>
 
-      <motion.div 
+      <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -133,7 +133,7 @@ const Hero: React.FC<HeroProps> = ({ onStartConsultation, onVisitShop }) => {
               Est. 2019
             </span>
           </motion.div>
-          
+
           <motion.div variants={itemVariants} className="mb-6 md:mb-8 h-40 md:h-64 flex flex-col justify-start overflow-hidden">
             <h1 className="text-5xl sm:text-7xl md:text-8xl font-bold leading-[1.1] md:leading-[1] text-slate-900 tracking-tight flex flex-col items-start">
               <span>Nahida's</span>
@@ -148,40 +148,40 @@ const Hero: React.FC<HeroProps> = ({ onStartConsultation, onVisitShop }) => {
           <motion.p variants={itemVariants} className="text-base md:text-xl text-slate-600 mb-8 md:mb-12 leading-relaxed max-w-lg font-light italic opacity-90">
             "Unveil the masterpiece within." Experience the fusion of luxury artistry and precision AI beauty engineering.
           </motion.p>
-          
+
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 md:gap-6">
-            <motion.button 
+            <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={onStartConsultation}
               className="px-8 md:px-12 py-4 md:py-5 bg-pink-400 text-white font-bold rounded-full flex items-center justify-center gap-4 group text-sm md:text-base shadow-xl hover:bg-pink-500 transition-all"
             >
               <i className="fa-solid fa-wand-sparkles text-lg"></i>
-              Launch AI Artist
+              Connect
             </motion.button>
-            <motion.button 
+            <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={onVisitShop}
               className="px-8 md:px-12 py-4 md:py-5 border-2 border-pink-400 text-pink-500 font-bold rounded-full hover:bg-pink-400 hover:text-white transition-all text-sm md:text-base shadow-lg shadow-pink-100/30"
             >
-              Visit Boutique
+              Visit Shop
             </motion.button>
           </motion.div>
         </div>
       </motion.div>
 
-      <motion.div 
+      <motion.div
         style={{ opacity: opacityFade }}
         className="absolute bottom-12 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-3"
       >
-        <span className="text-[8px] font-black uppercase tracking-[1em] text-slate-400 ml-[1em]">Discover</span>
+
         <div className="relative w-[1px] h-16 overflow-hidden bg-slate-100">
-           <motion.div 
-             animate={{ y: ['-100%', '100%'] }}
-             transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-             className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-transparent via-rose-300 to-transparent"
-           />
+          <motion.div
+            animate={{ y: ['-100%', '100%'] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+            className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-transparent via-rose-300 to-transparent"
+          />
         </div>
       </motion.div>
     </section>
