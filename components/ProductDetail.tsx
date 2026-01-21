@@ -6,9 +6,10 @@ interface ProductDetailProps {
   onBack: () => void;
   onAddToCart: (product: Product) => void;
   onAddToWishlist: (product: Product) => void;
+  onAddReview: (productId: string, review: Review) => void;
 }
 
-const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack, onAddToCart, onAddToWishlist }) => {
+const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack, onAddToCart, onAddToWishlist, onAddReview }) => {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -16,7 +17,9 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack, onAddToC
     shade: ''
   });
 
-  const [reviews, setReviews] = useState<Review[]>(product.reviews || []);
+  // Derived state from props
+  const reviews = product.reviews || [];
+
   const [newReview, setNewReview] = useState({
     userName: '',
     rating: 5,
@@ -95,7 +98,7 @@ Please confirm my order and let me know the payment details!`;
         date: new Date().toISOString().split('T')[0]
       };
 
-      setReviews([review, ...reviews]);
+      onAddReview(product.id, review);
       setNewReview({ userName: '', rating: 5, comment: '' });
       setIsSubmittingReview(false);
       setShowSuccess(true);

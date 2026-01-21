@@ -11,10 +11,7 @@ import Footer from './components/Footer';
 import IntroAnimation from './components/IntroAnimation';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const MOCK_REVIEWS: Review[] = [
-  { id: 'r1', userName: 'Elena V.', rating: 5, comment: 'Absolutely divine! The texture is like nothing I have ever used before. Truly worth the luxury price tag.', date: '2023-10-15' },
-  { id: 'r2', userName: 'Sophia M.', rating: 4, comment: 'Beautiful packaging and even better performance. The shade range is impressive.', date: '2023-11-02' }
-];
+const MOCK_REVIEWS: Review[] = [];
 
 const MOCK_PRODUCTS: Product[] = [
   {
@@ -25,7 +22,7 @@ const MOCK_PRODUCTS: Product[] = [
     description: 'A luxurious exfoliating scrub from France, infused with citron for a refreshing glow.',
     image: '/images/goddess-silk-foundation.jpg',
     rating: 5.0,
-    reviews: [...MOCK_REVIEWS]
+    reviews: []
   },
   {
     id: '2',
@@ -35,9 +32,7 @@ const MOCK_PRODUCTS: Product[] = [
     description: 'Complete post-chemical treatment set with Shampoo and Conditioner for intense hydration.',
     image: '/images/nahida-bloom-lipstick.jpg',
     rating: 4.9,
-    reviews: [
-      { id: 'r3', userName: 'Isabella R.', rating: 5, comment: 'The most comfortable matte lipstick. It stays all day without drying my lips!', date: '2023-12-05' }
-    ]
+    reviews: []
   },
   {
     id: '3',
@@ -47,7 +42,7 @@ const MOCK_PRODUCTS: Product[] = [
     description: 'Concentrated serum for hair density. Designed to support thicker, fuller, and healthier-looking hair.',
     image: '/images/ethereal-rose-palette.jpg',
     rating: 5.0,
-    reviews: [...MOCK_REVIEWS]
+    reviews: []
   },
   {
     id: '4',
@@ -284,6 +279,7 @@ const MOCK_PRODUCTS: Product[] = [
 
 const App: React.FC = () => {
   const [view, setView] = useState<ViewState>(ViewState.HOME);
+  const [products, setProducts] = useState<Product[]>(MOCK_PRODUCTS);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [showIntro, setShowIntro] = useState(false);
   const [appReady, setAppReady] = useState(false);
@@ -311,7 +307,9 @@ const App: React.FC = () => {
     if (typeof productOrSearch === 'string') {
       setSearchTerm(productOrSearch);
     } else if (productOrSearch) {
-      setSelectedProduct(productOrSearch);
+      // Find the latest version of the product from state to ensure reviews are up to date
+      const latestProduct = products.find(p => p.id === productOrSearch.id) || productOrSearch;
+      setSelectedProduct(latestProduct);
     } else {
       setSearchTerm('');
     }
@@ -335,6 +333,20 @@ const App: React.FC = () => {
     }
   };
 
+  const handleAddReview = (productId: string, review: Review) => {
+    setProducts(prevProducts => prevProducts.map(p => {
+      if (p.id === productId) {
+        return { ...p, reviews: [review, ...(p.reviews || [])] };
+      }
+      return p;
+    }));
+
+    // Also update selectedProduct if it's the one being reviewed
+    if (selectedProduct && selectedProduct.id === productId) {
+      setSelectedProduct(prev => prev ? { ...prev, reviews: [review, ...(prev.reviews || [])] } : null);
+    }
+  };
+
   const cartTotal = cart.reduce((acc, p) => acc + p.price, 0);
 
   const handleCheckout = () => {
@@ -344,10 +356,11 @@ const App: React.FC = () => {
     window.open(`https://wa.me/message/KUQBNJZDF62CP1?text=${encodedMessage}`, '_blank');
   };
 
-  const filteredProducts = MOCK_PRODUCTS.filter(p =>
+  const filteredProducts = products.filter(p =>
     p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     p.category.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
 
   const isContentVisible = appReady && !showIntro;
 
@@ -457,8 +470,9 @@ const App: React.FC = () => {
                         </motion.p>
                       </motion.div>
 
+
                       <ProductGrid
-                        products={MOCK_PRODUCTS.slice(0, 3)}
+                        products={products.slice(0, 3)}
                         onProductClick={(p) => navigateTo(ViewState.PRODUCT_DETAIL, p)}
                         wishlist={wishlist}
                         onToggleWishlist={toggleWishlist}
@@ -532,6 +546,7 @@ const App: React.FC = () => {
                   onBack={() => navigateTo(ViewState.SHOP)}
                   onAddToCart={addToCart}
                   onAddToWishlist={toggleWishlist}
+                  onAddReview={handleAddReview}
                 />
               )}
 
@@ -653,8 +668,8 @@ const App: React.FC = () => {
         </main>
 
         <Footer />
-      </div>
-    </div>
+      </div >
+    </div >
   );
 };
 
