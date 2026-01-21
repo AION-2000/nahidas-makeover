@@ -1,0 +1,7 @@
+{
+  "name": "Nahida's Makeover",
+  "description": "A luxury beauty destination for personalized makeovers and high-end cosmetics, featuring AI-driven beauty consulting.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
