@@ -279,7 +279,22 @@ const MOCK_PRODUCTS: Product[] = [
 
 const App: React.FC = () => {
   const [view, setView] = useState<ViewState>(ViewState.HOME);
-  const [products, setProducts] = useState<Product[]>(MOCK_PRODUCTS);
+  // Initialize products state by merging MOCK_PRODUCTS with reviews from localStorage
+  const [products, setProducts] = useState<Product[]>(() => {
+    try {
+      const savedReviews = localStorage.getItem('nahida_reviews');
+      if (savedReviews) {
+        const parsedReviews: Record<string, Review[]> = JSON.parse(savedReviews);
+        return MOCK_PRODUCTS.map(product => ({
+          ...product,
+          reviews: parsedReviews[product.id] || []
+        }));
+      }
+    } catch (error) {
+      console.error('Failed to load reviews from localStorage:', error);
+    }
+    return MOCK_PRODUCTS;
+  });
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [showIntro, setShowIntro] = useState(false);
   const [appReady, setAppReady] = useState(false);
@@ -334,12 +349,29 @@ const App: React.FC = () => {
   };
 
   const handleAddReview = (productId: string, review: Review) => {
-    setProducts(prevProducts => prevProducts.map(p => {
-      if (p.id === productId) {
-        return { ...p, reviews: [review, ...(p.reviews || [])] };
+    setProducts(prevProducts => {
+      const updatedProducts = prevProducts.map(p => {
+        if (p.id === productId) {
+          return { ...p, reviews: [review, ...(p.reviews || [])] };
+        }
+        return p;
+      });
+
+      // Save to localStorage
+      try {
+        const allReviews: Record<string, Review[]> = {};
+        updatedProducts.forEach(p => {
+          if (p.reviews && p.reviews.length > 0) {
+            allReviews[p.id] = p.reviews;
+          }
+        });
+        localStorage.setItem('nahida_reviews', JSON.stringify(allReviews));
+      } catch (error) {
+        console.error('Failed to save reviews to localStorage:', error);
       }
-      return p;
-    }));
+
+      return updatedProducts;
+    });
 
     // Also update selectedProduct if it's the one being reviewed
     if (selectedProduct && selectedProduct.id === productId) {
