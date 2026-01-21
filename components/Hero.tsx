@@ -71,18 +71,7 @@ const Hero: React.FC<HeroProps> = ({ onStartConsultation, onVisitShop }) => {
         style={{ y: yParallax }}
         className="absolute inset-0 z-0"
       >
-        <motion.img
-          initial={{ scale: 1.1, filter: 'brightness(1.2)' }}
-          animate={{ scale: 1, filter: 'brightness(1)' }}
-          transition={{ duration: 3, ease: 'easeOut' }}
-          src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1920&auto=format&fit=crop"
-          alt="Luxury Makeup"
-          className="w-full h-full object-cover brightness-[0.85] md:brightness-[0.9]"
-          style={{
-            maskImage: 'linear-gradient(to bottom, black 50%, transparent 90%)',
-            WebkitMaskImage: 'linear-gradient(to bottom, black 50%, transparent 90%)'
-          }}
-        />
+
 
         {/* Layered Lighting for Depth */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#fffdfd] via-[#fffdfd]/20 to-transparent"></div>
