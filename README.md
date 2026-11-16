@@ -1,6 +1,6 @@
 # Nahida's Makeover
 
-**A premium AI-powered beauty consulting and e-commerce platform**
+A beauty-studio website and e-commerce experience with AI-assisted consultation features, product discovery and a polished customer-facing interface.
 
 [![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://nahidasmakeover.com)
 [![React](https://img.shields.io/badge/React-19-blue)](https://react.dev/)
